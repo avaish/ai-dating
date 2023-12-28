@@ -1,9 +1,9 @@
-import Link from "next/link";
+'use client';
 
-import { CreatePost } from "~/app/_components/create-post";
-import { api } from "~/trpc/server";
+import { useChat } from 'ai/react';
 
-export default async function Home() {
+export default function Home() {
+  const { messages, input, handleInputChange, handleSubmit } = useChat();
 
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-b from-[#e3e0e7] to-[#babdf7] text-black">
@@ -11,13 +11,26 @@ export default async function Home() {
         <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
           Build Your Profile
         </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <p>Instructions go here</p>
+        <div className="mx-auto w-full max-w-md py-24 flex flex-col stretch">
+          {messages.map(m => (
+            <div key={m.id}>
+              {m.role === 'user' ? 'User: ' : 'AI: '}
+              {m.content}
+            </div>
+          ))}
+
+          <form onSubmit={handleSubmit}>
+            <label>
+              Say something...
+              <input
+                className="fixed w-full max-w-md bottom-0 border border-gray-300 rounded mb-8 shadow-xl p-2"
+                value={input}
+                onChange={handleInputChange}
+              />
+            </label>
+            <button type="submit">Send</button>
+          </form>
         </div>
-        <input
-          type="text"
-          className="block flex-1 py-1.5 pl-1 focus:ring-0 sm:text-sm sm:leading-6"
-        />
       </div>
     </main>
   );

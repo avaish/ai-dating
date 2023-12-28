@@ -1,5 +1,5 @@
-import { NextRequest } from 'next/server';
-import { Message as VercelChatMessage, StreamingTextResponse } from 'ai';
+import { type NextRequest } from 'next/server';
+import { type Message as VercelChatMessage, StreamingTextResponse } from 'ai';
  
 import { ChatOpenAI } from 'langchain/chat_models/openai';
 import { BytesOutputParser } from 'langchain/schema/output_parser';
@@ -60,10 +60,14 @@ The next message should be your greeting to the user.`;
  * https://js.langchain.com/docs/guides/expression_language/cookbook#prompttemplate--llm--outputparser
  */
 export async function POST(req: NextRequest) {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const body = await req.json();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const messages = body.messages ?? [];
-  const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
-  const currentMessageContent = messages[messages.length - 1].content;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+  const formattedPreviousMessages: string[] = messages.slice(0, -1).map(formatMessage);
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+  const currentMessageContent: string = messages[messages.length - 1].content;
  
   const prompt = PromptTemplate.fromTemplate(TEMPLATE);
   /**

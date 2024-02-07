@@ -1,9 +1,15 @@
 'use client';
 
 import { useChat } from 'ai/react';
+import { useState } from "react";
 
 export default function Home() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+  const [file, setFile] = useState<File | null>(null);
+
+  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFile(e.target.files?.[0] != undefined ? e.target.files?.[0] : null);
+  };
 
   return (
     <main className="flex min-h-screen flex-col bg-gradient-to-b from-[#e3e0e7] to-[#babdf7] text-black">
@@ -27,6 +33,7 @@ export default function Home() {
                 value={input}
                 onChange={handleInputChange}
               />
+              <input type="file" name="image" onChange={handleFileSelected} />
             </label>
             <button type="submit">Send</button>
           </form>

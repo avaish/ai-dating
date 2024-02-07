@@ -57,7 +57,8 @@ export async function POST(req: NextRequest) {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
   const messages: VercelChatMessage[] = body.messages ?? [];
   const old_messages: BaseMessage[] = messages.slice(0, -1).map(formatMessage);
-  const currentMessageContent: string = messages[messages.length - 1].content;
+  const currentMessage = messages[messages.length - 1];
+  const currentMessageContent: string = currentMessage !== undefined ? currentMessage.content : '';
 
   const model = new ChatOpenAI({
     modelName: "gpt-4-vision-preview",

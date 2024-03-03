@@ -1,15 +1,10 @@
-To recreate requirements,`pip-compile requirements.in`
 
-`pip install -r requirements.txt`
+`pip-compile requirements.in`
+
 
 `flask db migrate -m "users table"`
 `flask db upgrade`
 `flask db downgrade`
-
-`flask shell`
-`flask --debug run --port=5001`
-
-`localhost:8001/healthz`
 
 `python -m pytest tests`
 

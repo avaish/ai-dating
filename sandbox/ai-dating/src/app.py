@@ -1,6 +1,5 @@
 from src.config import Config
 
-
 from flask import Flask
 import sqlalchemy as sa
 import sqlalchemy.orm as so

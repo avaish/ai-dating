@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - AI Dating</title>
+      {% else %}
+      <title>Welcome to AI Dating</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>AI Dating: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

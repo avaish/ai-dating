@@ -1,0 +1,5 @@
+Run `scripts/bootstrap`
+
+To recreate requirements,`pip-compile requirements.in`
+
+`pip install -r requirements.txt`

@@ -12,3 +12,13 @@ To recreate requirements,`pip-compile requirements.in`
 `localhost:8001/healthz`
 
 `python -m pytest tests`
+
+`gunicorn -b localhost:8001 -w 4 "src.app:create_app()"`
+
+`docker run -dp 5001:5001 -w /app -v "$(pwd):/app" ai-dating sh -c "flask run --host 0.0.0.0"`
+
+`docker compose build`
+
+`docker compose up`
+
+`docker compose down`

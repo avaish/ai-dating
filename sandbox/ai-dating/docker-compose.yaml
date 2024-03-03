@@ -15,7 +15,6 @@ services:
   ai-dating:
     build: .
     container_name: ai-dating
-    command: gunicorn --bind 0.0.0.0:8001 --workers 4 "src.app:create_app()"
     image: ai-dating
     ports:
       - "8001:5000"
@@ -27,6 +26,28 @@ services:
       ai-dating-network:
         aliases:
           - ai-dating-app
+    environment:
+      - DATABASE=postgres
+      - SQL_HOST=ai-dating
+      - SQL_PORT=5432
+  db:
+    image: postgres:13
+    container_name: db
+    volumes:
+      - dbdata:/var/lib/postgresql/data/
+    networks:
+      ai-dating-network:
+    environment:
+      - POSTGRES_USER=ai_dating
+      - POSTGRES_PASSWORD=ai_dating
+      - POSTGRES_DB=ai_dating_dev
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+
+volumes:
+  dbdata:
 
 networks:
   ai-dating-network:

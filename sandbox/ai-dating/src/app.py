@@ -14,6 +14,7 @@ def register_routes(app: Flask):
     app.register_blueprint(posts_bp)
     app.register_blueprint(users_bp)
 
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -32,5 +33,8 @@ def create_app(config_class=Config):
         pass
     
     register_routes(app)
+
+    from src.models.posts import Post
+    from src.models.users import User
 
     return app

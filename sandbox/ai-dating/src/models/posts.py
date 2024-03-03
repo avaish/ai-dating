@@ -8,7 +8,6 @@ from src.models.base_model import BaseModel
 from src.models.users import User
 
 class Post(BaseModel):
-    id: so.Mapped[int] = so.mapped_column(primary_key=True)
     body: so.Mapped[str] = so.mapped_column(sa.String(140))
     timestamp: so.Mapped[datetime] = so.mapped_column(
         index=True, default=lambda: datetime.now(timezone.utc))

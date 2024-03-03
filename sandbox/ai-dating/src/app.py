@@ -31,7 +31,7 @@ def create_app(config_class=Config):
 
     if not app.debug and not app.testing:
         pass
-    
+
     register_routes(app)
 
     from src.models.posts import Post

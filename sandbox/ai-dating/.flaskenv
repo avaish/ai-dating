@@ -1,1 +1,1 @@
-FLASK_APP=src/app.py
+FLASK_APP=src.app:create_app()

@@ -1,0 +1,14 @@
+services:
+  ai-dating:
+    container_name: ai-dating
+    build: .
+    image: ai-dating
+    command: gunicorn --workers 1 --reload
+    ports:
+      - "5001:8080"
+    volumes:
+      - type: bind
+        source: ./
+        target: /app/
+    environment:
+      FLASK_APP: 'src.app:create_app()'

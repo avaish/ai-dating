@@ -1,5 +1,3 @@
-Run `scripts/bootstrap`
-
 To recreate requirements,`pip-compile requirements.in`
 
 `pip install -r requirements.txt`
@@ -12,3 +10,5 @@ To recreate requirements,`pip-compile requirements.in`
 `flask --debug run --port=5001`
 
 `localhost:8001/healthz`
+
+`python -m pytest tests`

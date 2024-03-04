@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+set -eo pipefail
+
+python_version=$(grep -G "^3" .python-version)
+venv_name=$(grep -G "^[^3]" .python-version)
+
+if python --version 2>/dev/null | grep -q $python_version; then
+    echo "Python already installed and activated"
+else
+    echo "Installing Python"
+    pyenv install --skip-existing "$python_version"
+    echo "Setting up virtualenv"
+    pyenv virtualenv "$python_version" "$venv_name"
+fi
+
+if which pip-compile 2>/dev/null; then
+  echo "pip-compile already installed"
+else
+  pushd ../..; pipx install pip-tools; popd
+fi
+
+
+if ! (pip-sync requirements.txt 2>/dev/null); then
+  pip install -r requirements.txt
+fi

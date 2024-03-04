@@ -2,5 +2,6 @@ flask
 flask-migrate
 flask-sqlalchemy
 gunicorn
+langchain
 psycopg2-binary
 python-dotenv

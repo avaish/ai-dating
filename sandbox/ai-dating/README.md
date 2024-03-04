@@ -42,4 +42,6 @@ Auto-reload on save
 
 Logging
 
+Dev ENV File
+
 Migrations clean up

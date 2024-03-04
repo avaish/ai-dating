@@ -36,3 +36,10 @@ docker compose exec db psql --username=ai_dating --dbname=ai_dating_dev
 to access the Database
 
 Migrations are still a bit of a mess, but right now you can edit `entrypoint.sh` to run `flask migrate -m "<migration_message>"` and `flask db upgrade`
+
+# TODO
+Auto-reload on save
+
+Logging
+
+Migrations clean up

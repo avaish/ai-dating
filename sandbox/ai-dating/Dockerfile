@@ -17,10 +17,11 @@ RUN pip install --upgrade pip
 COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
+# Project is bind-mounted
 # copy project
-COPY migrations migrations
-COPY src src
-COPY entrypoint.sh entrypoint.sh
+# COPY migrations migrations
+# COPY src src
+# COPY entrypoint.sh entrypoint.sh
 
 # run entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]

@@ -1,9 +1,12 @@
 from datetime import datetime, timezone
+from typing import Any, TypeVar
 
 from src.app import db
 
 import sqlalchemy as sa
 import sqlalchemy.orm as so
+
+T = TypeVar("T", bound="BaseModel")
 
 class BaseModel(db.Model):
     __abstract__ = True
@@ -12,6 +15,14 @@ class BaseModel(db.Model):
                    autoincrement=True)
     created_at = db.Column(db.DateTime(timezone=True), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False)
+
+    @classmethod
+    def get(cls: type[T], id: int) -> T:
+        return db.session.query(cls).filter(cls.id == id).first()
+
+    @classmethod
+    def list(cls: type[T]) -> list[T]:
+        return db.session.scalars(sa.select(cls)).all()
 
     def before_save(self, *args, **kwargs):
         current_time = datetime.now(timezone.utc)

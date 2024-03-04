@@ -1,11 +1,27 @@
 from flask import Blueprint
 
+from src.lib.utils import request_fields
+from src.models.users import User
+
 users_bp = Blueprint("users", __name__)
 
 @users_bp.route("/v1/users", methods=["GET"])
-def get_posts():
-    return "Got Users"
+def get_users():
+    users = User.list()
+    resp = []
+    for user in users:
+        resp.append(user.email)
+    return resp
 
-@users_bp.route("/v1/users/<user_id>", methods=["GET"])
-def get_post(user_id: str):
-    return user_id
+@users_bp.route("/v1/users/<id>", methods=["GET"])
+def get_user(id: str) -> User:
+    user = User.get(id)
+    return user
+
+@users_bp.route("/v1/users", methods=["POST"])
+@request_fields({"username", "email"})
+def create_user(username: str, email: str) -> User:
+    user = User(username=username, email=email)
+    user.save()
+    return user
+

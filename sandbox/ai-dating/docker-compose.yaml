@@ -19,9 +19,7 @@ services:
     ports:
       - "8001:5000"
     volumes:
-      - type: bind
-        source: ./
-        target: /app/
+      - ./:/app/
     networks:
       ai-dating-network:
         aliases:

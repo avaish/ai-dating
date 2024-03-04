@@ -1,22 +1,14 @@
 
-# Load OAI api key from .env
-import re
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-OAI_api_key = os.environ["OPENAI_API_KEY"]
+from typing import TypeAlias
 
-# Initialize llm
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, AIMessage, SystemMessage
-llm = OpenAI()
-chat_model = ChatOpenAI(model="gpt-4-vision-preview",openai_api_key=OAI_api_key, max_tokens=1000)
 
+from src.config import get_config
 
-
-# PROMPTS
+Message: TypeAlias = AIMessage | HumanMessage | SystemMessage 
 
 profile_guru_prompt = """You are a dating consultant bot, trying to build a Hinge profile for the user. \n\n
 Your final output should be (a) 6 photos that make them look their best, and (b) 3 responses to standard Hinge prompts that represent their authentic self in a charming light. \n\n
@@ -34,7 +26,7 @@ Your tone is pithy, friendly and candid. Make the user feel at ease & like they 
 The next message should be your greeting to the user."""
 
 
-banter_guru_prompt =  """You are Jerry Seinfeld the sitcom character playing a dating app wingman, trying to help the user get to start an engaging conversation with their dating app matches.User will give you a snippet from their match's profile that they want to react to as an opener. You will offer 3 different suggestions for how to open. The user can ask for alternatives OR variations on those suggestions. \n\n
+BANTER_GURU_PROMPT =  """You are Jerry Seinfeld the sitcom character playing a dating app wingman, trying to help the user get to start an engaging conversation with their dating app matches.User will give you a snippet from their match's profile that they want to react to as an opener. You will offer 3 different suggestions for how to open. The user can ask for alternatives OR variations on those suggestions. \n\n
 Keep the openers short and sweet - no more than 15-20 words. Make the tone be casual, flirty, and engaging. You may suggest asking an engaging open-ended question about the snippet, or sharing a light-hearted witty comment on it. Play it cool, don't be eager about expressing overt interest in the opener. \n\n
 
 Details about the user you can use if they're relevant: Loves playing squash, and staying active in general. Big movie buff - favorite director is Christopher Nolan. Loves reading - scifi is the current genre. Big foodie - Italian, sushi and malay food are the bomb. Enjoys live music, standup comedy, new experiences. Curious and playful. 
@@ -51,62 +43,38 @@ Snippet from match profile: "Dating me is like driving down a staircase" \n "I'v
 Ask user for a snippet from their match's profile they'd like to react to.
 """
 
-#parse_image_urls = """Review the following text. Find the """
+ACTIVE_PROMPT = BANTER_GURU_PROMPT
 
 
-# HELPER FUNCTIONS
-
-def find_urls(input_string):
-    # Regex pattern for matching URLs
-    url_pattern = r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'
+class OpenAPIClient:
+    def __init__(self):
+        self.llm = OpenAI()
+        self.chat_model = ChatOpenAI(model="gpt-4-vision-preview",openai_api_key=get_config().OPEN_API_KEY, max_tokens=1000)
+        self.chat_model.invoke([self.create_system_message(ACTIVE_PROMPT)])
     
-    # Find all URLs in the input string
-    urls = re.findall(url_pattern, input_string)
+    def create_system_message(input: str) -> SystemMessage:
+        return SystemMessage(content=input)
     
-    # Check if any URLs are found
-    contains_url = bool(urls)
-
-    return contains_url, urls
-
-
-# PROGRAM
-
-active_prompt = banter_guru_prompt
-
-# Initialize prompt
-messages_list = [SystemMessage(content=active_prompt)]
-initial_message = chat_model.invoke(messages_list)
-print(f'\n {initial_message.content}')
-
-# User input loop
-
-
-while True:
-    user_input = input("\nEnter input (type 'exit' to quit):\n")
-    has_url, urls_list = find_urls(user_input)
-    
-    # Determine what type of input it is & act accordingly
-    if user_input.lower() == 'exit':
-        break
-    
-    ### TODO: Update URL detection to make more robust & account for urls / images over multiple user messages
-    elif has_url == True:
+    def create_human_message(input: str) -> HumanMessage:
         content = [ {"type": "text", "text": "Here are the images"}]
-        for url in urls_list:
-            url_dict = {
-                "type": "image_url",
-                "image_url": {
-                    "url": url,
-                    "detail": "auto",
-                },
-            }
-            content.append(url_dict)
-        messages_list.append(HumanMessage(content=content))
-        
-    else:
-        messages_list.append(HumanMessage(content=user_input))
-    
-    result = chat_model.invoke(messages_list)
-    print(f"\n ============================")
-    print(f"\n {result.content}")
-    messages_list.append(SystemMessage(content=result.content))
+        url_dict = {
+            "type": "image_url",
+            "image_url": {
+                "url": input,
+                "detail": "auto",
+            },
+        }
+        content.append(url_dict)
+        return HumanMessage(content=content)
+
+    def invoke(self, messages: list[Message]) -> SystemMessage:
+        result = self.chat_model.invoke(messages)
+        return SystemMessage(content=result.content)
+
+
+
+def get_open_api_client() -> OpenAPIClient:
+    global OPEN_API_CLIENT
+    if OPEN_API_CLIENT is None:
+        OPEN_API_CLIENT = OpenAPIClient()
+    return OPEN_API_CLIENT

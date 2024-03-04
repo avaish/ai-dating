@@ -4,8 +4,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 class Config:
     DEBUG = False
     TESTING = False
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = "postgresql://ai_dating:ai_dating@db:5432/ai_dating_dev"
+    OPEN_API_KEY = os.environ.get("OPENAI_API_KEY", "open-api-key")
+    SECRET_KEY = os.environ.get('SECRET_KEY', 'you-will-never-guess')
+    SQLALCHEMY_DATABASE_URI = os.environ('DATABASE_URL', 'postgresql://ai_dating:ai_dating@db:5432/ai_dating_dev')
     
 class ProductionConfig(Config):
     DEBUG = False
@@ -18,4 +19,5 @@ class TestConfig(Config):
     TESTING = True
     SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
-
+def get_config():
+    return Config()

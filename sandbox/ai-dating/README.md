@@ -47,3 +47,7 @@ Dev ENV File
 Migrations clean up
 
 Hook up Front-end
+
+Host DB
+
+Deploy non-locally

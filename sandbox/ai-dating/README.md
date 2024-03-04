@@ -40,8 +40,10 @@ Migrations are still a bit of a mess, but right now you can edit `entrypoint.sh`
 # TODO
 Auto-reload on save
 
-Logging
+Pipe Logs
 
 Dev ENV File
 
 Migrations clean up
+
+Hook up Front-end

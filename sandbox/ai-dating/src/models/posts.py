@@ -11,6 +11,3 @@ class Post(BaseModel):
     
     user_id = db.Column(db.ForeignKey(User.id), index=True)
     author = db.relationship('User', back_populates='posts')
-
-    def __repr__(self):
-        return '<Post {}>'.format(self.body)

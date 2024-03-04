@@ -8,7 +8,18 @@ import sqlalchemy.orm as so
 
 T = TypeVar("T", bound="BaseModel")
 
-class BaseModel(db.Model):
+class DefaultRepr:
+    """Mixin that overrides __repr__ with an object's class' name and its internal state.
+
+    e.g., "MyDefaultRepr('dict_': {'b': ['c', 'd']}, 'number': 3, 'string': 'a')"
+    """
+
+    def __repr__(self) -> str:
+        key_value_pairs = [f"{key}={value!r}" for key, value in self.__dict__.items()]
+        key_value_str = ", ".join(key_value_pairs)
+        return f"{self.__class__.__name__}({key_value_str})"
+
+class BaseModel(db.Model, DefaultRepr):
     __abstract__ = True
     id = db.Column(db.Integer,
                    primary_key=True,
@@ -23,6 +34,9 @@ class BaseModel(db.Model):
     @classmethod
     def list(cls: type[T]) -> list[T]:
         return db.session.scalars(sa.select(cls)).all()
+    
+    def to_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}
 
     def before_save(self, *args, **kwargs):
         current_time = datetime.now(timezone.utc)

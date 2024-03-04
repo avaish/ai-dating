@@ -6,7 +6,7 @@ from src.models.users import User
 
 
 class Post(BaseModel):
-    body = db.Column(db.String(140))
+    body = db.Column(db.Text())
     timestamp = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), index=True)
     
     user_id = db.Column(db.ForeignKey(User.id), index=True)

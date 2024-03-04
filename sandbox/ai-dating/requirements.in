@@ -3,5 +3,7 @@ flask-migrate
 flask-sqlalchemy
 gunicorn
 langchain
+langchain-openai
+openai
 psycopg2-binary
 python-dotenv

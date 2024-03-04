@@ -1,14 +1,18 @@
 
 
-from typing import Type, TypeAlias
+from typing import Optional, Type, TypeAlias
 
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
+from langchain_core.prompt_values import ChatPromptValue
+from langchain_openai.llms import OpenAI
+from langchain_openai.chat_models import ChatOpenAI
 from langchain.schema import HumanMessage, AIMessage, SystemMessage
 
 from src.config import get_config
 
-Message: TypeAlias = AIMessage | HumanMessage | SystemMessage 
+Message: TypeAlias = AIMessage | HumanMessage | SystemMessage
+Invokable: TypeAlias = AIMessage | HumanMessage | ChatPromptValue
+
+
 
 def create_message(type: Type[Message], input: str) -> Message:
     return type(content=input)
@@ -29,19 +33,21 @@ DEFAULT_MODEL = "gpt-4-vision-preview"
 MAX_TOKENS = 1000
 
 class OpenAPIClient:
-   
-    def __init__(self, model: str=DEFAULT_MODEL):
-        self.llm = OpenAI()
-        self.chat_model = ChatOpenAI(model=model,openai_api_key=get_config().OPEN_API_KEY, max_tokens=MAX_TOKENS)
 
-    def invoke(self, message: Message) -> SystemMessage:
-        return self.invoke([message])
-    
-    def invoke(self, messages: list[Message]) -> SystemMessage:
-        result = self.chat_model.invoke(messages)
+    def __init__(self, model: str=DEFAULT_MODEL):
+        config = get_config()
+        self.llm = OpenAI(openai_api_key=config.OPEN_API_KEY)
+        self.chat_model = ChatOpenAI(model=model, openai_api_key=config.OPEN_API_KEY, max_tokens=MAX_TOKENS)
+
+    def invoke(self, invokable: Invokable) -> SystemMessage:
+        return self.invoke([invokable])
+
+    def invoke(self, invokables: list[Invokable]) -> SystemMessage:
+        result = self.chat_model.invoke(invokables)
         return create_message(SystemMessage, result.content)
 
 
+OPEN_API_CLIENT: Optional[OpenAPIClient] = None
 
 def get_open_api_client() -> OpenAPIClient:
     global OPEN_API_CLIENT

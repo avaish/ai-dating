@@ -1,5 +1,9 @@
 #!/bin/sh
 
-gunicorn --bind 0.0.0.0:8001 --workers 4 "src.app:create_app()"
+uvicorn src.main:app --proxy-headers --host 0.0.0.0 --port 8001 --reload
+
+# alembic revision --autogenerate -m "Create a baseline migrations"
+
+# alembic upgrade head
 
 exec "$@"

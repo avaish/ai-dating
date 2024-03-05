@@ -1,9 +1,9 @@
-flask
-flask-migrate
-flask-sqlalchemy
-gunicorn
+alembic
 langchain
 langchain-openai
+fastapi
 openai
 psycopg2-binary
+pydantic
 python-dotenv
+uvicorn

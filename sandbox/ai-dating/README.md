@@ -23,7 +23,7 @@ If everything worked, you should be able to navigate to `localhost/healthz`
 
 ## Technical Infrastructure
 
-A good place to start is with `docker-compose.yaml`. This shows the three services that we run nginx, db, and ai-dating. nginx is our proxy, postgres is our db, and ai-dating is Python Flask App.
+A good place to start is with `docker-compose.yaml`. This shows the three services that we run nginx, db, and ai-dating. nginx is our proxy, postgres is our db, and ai-dating is Python Fast API App.
 
 From here, looking at the `Dockerfile` will show the entrypoint for our Flask App.
 
@@ -35,12 +35,10 @@ docker compose exec db psql --username=ai_dating --dbname=ai_dating_dev
 ```
 to access the Database
 
-Migrations are still a bit of a mess, but right now you can edit `entrypoint.sh` to run `flask migrate -m "<migration_message>"` and `flask db upgrade`
+
+Alembic for migrations. See `entrypoint.sh`
 
 # TODO
-Auto-reload on save
-
-Pipe Logs
 
 Dev ENV File
 

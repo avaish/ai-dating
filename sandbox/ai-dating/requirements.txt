@@ -11,7 +11,7 @@ aiohttp==3.9.3
 aiosignal==1.3.1
     # via aiohttp
 alembic==1.13.1
-    # via flask-migrate
+    # via -r requirements.in
 annotated-types==0.6.0
     # via pydantic
 anyio==4.3.0
@@ -19,10 +19,9 @@ anyio==4.3.0
     #   httpx
     #   langchain-core
     #   openai
+    #   starlette
 attrs==23.2.0
     # via aiohttp
-blinker==1.7.0
-    # via flask
 certifi==2024.2.2
     # via
     #   httpcore
@@ -31,32 +30,23 @@ certifi==2024.2.2
 charset-normalizer==3.3.2
     # via requests
 click==8.1.7
-    # via flask
+    # via uvicorn
 dataclasses-json==0.6.4
     # via
     #   langchain
     #   langchain-community
 distro==1.9.0
     # via openai
-flask==3.0.2
-    # via
-    #   -r requirements.in
-    #   flask-migrate
-    #   flask-sqlalchemy
-flask-migrate==4.0.5
+fastapi==0.110.0
     # via -r requirements.in
-flask-sqlalchemy==3.1.1
-    # via
-    #   -r requirements.in
-    #   flask-migrate
 frozenlist==1.4.1
     # via
     #   aiohttp
     #   aiosignal
-gunicorn==21.2.0
-    # via -r requirements.in
 h11==0.14.0
-    # via httpcore
+    # via
+    #   httpcore
+    #   uvicorn
 httpcore==1.0.4
     # via httpx
 httpx==0.27.0
@@ -67,10 +57,6 @@ idna==3.6
     #   httpx
     #   requests
     #   yarl
-itsdangerous==2.1.2
-    # via flask
-jinja2==3.1.3
-    # via flask
 jsonpatch==1.33
     # via
     #   langchain
@@ -99,10 +85,7 @@ langsmith==0.1.14
 mako==1.3.2
     # via alembic
 markupsafe==2.1.5
-    # via
-    #   jinja2
-    #   mako
-    #   werkzeug
+    # via mako
 marshmallow==3.21.0
     # via dataclasses-json
 multidict==6.0.5
@@ -123,13 +106,14 @@ orjson==3.9.15
     # via langsmith
 packaging==23.2
     # via
-    #   gunicorn
     #   langchain-core
     #   marshmallow
 psycopg2-binary==2.9.9
     # via -r requirements.in
 pydantic==2.6.3
     # via
+    #   -r requirements.in
+    #   fastapi
     #   langchain
     #   langchain-core
     #   langsmith
@@ -160,9 +144,10 @@ sniffio==1.3.1
 sqlalchemy==2.0.27
     # via
     #   alembic
-    #   flask-sqlalchemy
     #   langchain
     #   langchain-community
+starlette==0.36.3
+    # via fastapi
 tenacity==8.2.3
     # via
     #   langchain
@@ -175,6 +160,7 @@ tqdm==4.66.2
 typing-extensions==4.10.0
     # via
     #   alembic
+    #   fastapi
     #   openai
     #   pydantic
     #   pydantic-core
@@ -184,7 +170,7 @@ typing-inspect==0.9.0
     # via dataclasses-json
 urllib3==2.2.1
     # via requests
-werkzeug==3.0.1
-    # via flask
+uvicorn==0.27.1
+    # via -r requirements.in
 yarl==1.9.4
     # via aiohttp

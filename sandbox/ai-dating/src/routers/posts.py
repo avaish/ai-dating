@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 
-from src.models.posts import PostRepository, create_post_repository
+from src.models.posts import Post, create_post_repository
+from src.models.base_model import Repository
 
 router = APIRouter(
     prefix="/posts",
@@ -27,7 +28,7 @@ async def read_post(post_id: str):
     tags=["custom"],
     responses={403: {"description": "Operation forbidden"}},
 )
-async def update_post(post_id: str, post_repository: PostRepository = Depends(create_post_repository)):
+async def update_post(post_id: str, post_repository: Repository[Post] = Depends(create_post_repository)):
     if post_id != "plumbus":
         raise HTTPException(
             status_code=403, detail="You can only update the item: plumbus"

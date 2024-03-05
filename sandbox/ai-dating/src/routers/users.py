@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 
-from src.models.users import User, UserRepository, create_user_repository
+from src.models.base_model import Repository
+from src.models.users import User, create_user_repository
 
 router = APIRouter(
     prefix="/users",
@@ -9,7 +10,7 @@ router = APIRouter(
 )
 
 @router.get("/")
-async def read_users(user_repository: UserRepository = Depends(create_user_repository)):
+async def read_users(user_repository: Repository[User] = Depends(create_user_repository)):
     return user_repository.list()
 
 

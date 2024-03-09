@@ -21,6 +21,10 @@ docker compose up
 
 If everything worked, you should be able to navigate to `localhost/healthz`
 
+## VSCode
+
+https://code.visualstudio.com/docs/python/environments
+
 ## Technical Infrastructure
 
 A good place to start is with `docker-compose.yaml`. This shows the three services that we run nginx, db, and ai-dating. nginx is our proxy, postgres is our db, and ai-dating is Python Fast API App.

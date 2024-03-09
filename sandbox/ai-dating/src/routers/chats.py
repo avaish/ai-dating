@@ -10,8 +10,8 @@ from src.lib.open_api_client import get_open_api_client
 from src.lib.prompts import BANTER_GURU_PROMPT, PROFILE_GURU_PROMPT
 
 class ChatMode(Enum):
-    BANTER = 'banter'
-    PROFILE_CREATION = 'profile-creation'
+    BANTER = "banter"
+    PROFILE_CREATION = "profile-creation"
 
 CHAT_MODE_TO_PROMPT = {
     ChatMode.BANTER: BANTER_GURU_PROMPT,

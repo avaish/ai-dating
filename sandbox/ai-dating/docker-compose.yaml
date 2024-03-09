@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  nginx:
+  proxy-ai-dating-app:
     container_name: proxy-ai-dating-app
     build:
       context: ./frontend/

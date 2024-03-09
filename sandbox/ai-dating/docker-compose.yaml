@@ -27,7 +27,7 @@ services:
     env_file:
     - path: ./default.env
       required: true
-    - path: ./override.env
+    - path: ./.env.local
       required: false
   db:
     image: postgres:13

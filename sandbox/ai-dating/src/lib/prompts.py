@@ -34,5 +34,8 @@ Snippet from match profile: "Dating me is like driving down a staircase" \n "I'v
 Ask user for a snippet from their match's profile they'd like to react to.
 """
 
-PROFILE_GURU_PROMPT_TEMPLATE = ChatPromptTemplate.from_template(PROFILE_GURU_PROMPT)
+PROFILE_GURU_PROMPT_TEMPLATE = ChatPromptTemplate.from_messages([
+    ("system", PROFILE_GURU_PROMPT),
+    ("user", "{input}"),
+])
 BANTER_GURU_PROMPT_TEMPLATE = ChatPromptTemplate.from_template(BANTER_GURU_PROMPT)

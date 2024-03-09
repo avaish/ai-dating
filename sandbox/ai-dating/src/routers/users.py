@@ -15,7 +15,8 @@ async def read_users(user_repository: Repository[User] = Depends(create_user_rep
 
 
 @router.get("/me")
-async def read_user_me():
+async def read_user_me(user_repository: Repository[User] = Depends(create_user_repository)):
+    user_repository.save(User.create(username="sworls1", email="abcd@def", password_hash="abc"))
     return {"username": "1111"}
 
 

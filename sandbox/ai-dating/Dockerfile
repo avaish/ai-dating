@@ -18,6 +18,7 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # copy project
+COPY images images
 COPY migrations migrations
 COPY src src
 COPY entrypoint.sh entrypoint.sh

@@ -13,6 +13,8 @@ to set-up the virtual environment.
 
 There is configuration for VSCode in this repo, otherwise you're on your own.
 
+Add `.env.local` with `OPENAI_API_KEY`
+
 Run
 ```sh
 docker compose build
@@ -48,8 +50,6 @@ We'll probably want to change the `message` table a bit to have indices and stuf
 https://api.python.langchain.com/en/latest/_modules/langchain_community/chat_message_histories/postgres.html#PostgresChatMessageHistory
 
 # TODO
-
-Dev ENV File
 
 Migrations clean up
 

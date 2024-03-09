@@ -2,13 +2,17 @@ import functools
 from sqlalchemy import create_engine
 from sqlalchemy.engine import URL
 
+from src.config import get_config
+
+config = get_config()
+
 DB_URL = URL.create(
     drivername="postgresql",
-    username="ai_dating",
-    password="ai_dating",
-    host="db",
-    database="ai_dating_dev",
-    port=5432
+    username=config.DB_USER,
+    password=config.DB_PASSWORD,
+    host=config.DB_HOST,
+    database=config.DB_NAME,
+    port=config.DB_PORT
 )
 
 @functools.lru_cache(maxsize=None)

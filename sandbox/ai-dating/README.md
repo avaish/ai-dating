@@ -60,3 +60,5 @@ Host DB
 Deploy non-locally
 
 Add precommit hooks
+
+Add user to message log

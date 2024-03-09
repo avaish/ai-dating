@@ -26,7 +26,7 @@ router = APIRouter(
 )
 
 @router.get("/{session_id}:image")
-async def do_chat(session_id: str, chat_mode: ChatMode):
+async def do_chat(session_id: str, chat_mode: ChatMode = ChatMode.PROFILE_CREATION):
     open_api_client = get_open_api_client()
     chat = open_api_client.chat_model
 
@@ -43,7 +43,7 @@ async def do_chat(session_id: str, chat_mode: ChatMode):
 
 
 @router.get("/{session_id}")
-async def do_chat(session_id: str, chat_mode: ChatMode, text: str):
+async def do_chat(session_id: str, text: str, chat_mode: ChatMode = ChatMode.PROFILE_CREATION):
     system_message = create_system_message(CHAT_MODE_TO_PROMPT[chat_mode])
     chat_session = ChatSession(session_id, system_message)
     ai_message = chat_session.invoke(text)

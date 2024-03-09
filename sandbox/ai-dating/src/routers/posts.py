@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from langchain_core.prompts import ChatPromptTemplate
+import os
 
 from src.models.posts import Post, create_post_repository
 from src.models.users import User, create_user_repository
@@ -16,22 +17,19 @@ router = APIRouter(
 
 fake_posts_db = {"plumbus": {"name": "Plumbus"}, "gun": {"name": "Portal Gun"}}
 
+IMAGE_DIR = "/app/images"
+
 @router.get("/")
 async def read_posts(user_id: str="1dfc7961-7d6a-479a-8778-1925752e13d6", post_repository: Repository[Post] = Depends(create_post_repository), user_repository: Repository[User] = Depends(create_user_repository)):
     user = user_repository.get_by_id(user_id)
     open_api_client = get_open_api_client()
 
-    human_message = create_human_message(
-        [
-            "PXL_20230617_100429151.jpg",
-            "PXL_20230730_170713672.jpg",
-            "PXL_20231012_165843896.jpg",
-            "PXL_20231016_125850431.jpg",
-            "PXL_20231021_201843960.jpg",
-            "PXL_20240219_121214786.jpg",
-            "PXL_20240220_115127835.jpg",
-        ]
-    )
+    images = []
+    for _, _, filenames in os.walk(IMAGE_DIR):
+        images = filenames
+
+
+    human_message = create_human_message(images)
     PROFILE_GURU_PROMPT_TEMPLATE = ChatPromptTemplate.from_messages([("system", PROFILE_GURU_PROMPT), human_message])
     chain = PROFILE_GURU_PROMPT_TEMPLATE | open_api_client.chat_model
     result = chain.invoke({})

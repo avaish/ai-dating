@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -eo pipefail
 
-python_version=$(grep -G "^3" .python-version)
-venv_name=$(grep -G "^[^3]" .python-version)
+python_version=$(grep -G "^3" backend/.python-version)
+venv_name=$(grep -G "^[^3]" backend/.python-version)
 
 if python --version 2>/dev/null | grep -q $python_version; then
     echo "Python already installed and activated"
@@ -20,6 +20,6 @@ else
 fi
 
 
-if ! (pip-sync requirements.txt 2>/dev/null); then
-  pip install -r requirements.txt
+if ! (pip-sync backend/requirements.txt 2>/dev/null); then
+  pip install -r backend/requirements.txt
 fi

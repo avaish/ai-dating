@@ -49,3 +49,5 @@ Hook up Front-end
 Host DB
 
 Deploy non-locally
+
+Store Message History/Session in DB

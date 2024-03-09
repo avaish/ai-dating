@@ -98,22 +98,3 @@ ban-relative-imports = "all"
 [tool.ruff.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
-
-[tool.coverage.run]
-source_pkgs = ["file_watcher_adapter", "tests"]
-branch = true
-parallel = true
-omit = [
-  "src/file_watcher_adapter/__about__.py",
-]
-
-[tool.coverage.paths]
-file_watcher_adapter = ["src/file_watcher_adapter", "*/file-watcher-adapter/src/file_watcher_adapter"]
-tests = ["tests", "*/file-watcher-adapter/tests"]
-
-[tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]

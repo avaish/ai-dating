@@ -42,3 +42,5 @@ yarn-error.log*
 *.tsbuildinfo
 
 __pycache__
+**/node_modules
+**/yarn.lock

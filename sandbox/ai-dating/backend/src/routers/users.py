@@ -4,7 +4,7 @@ from src.models.base_model import Repository
 from src.models.users import User, create_user_repository
 
 router = APIRouter(
-    prefix="/users",
+    prefix="/api/users",
     tags=["users"],
     responses={404: {"description": "Not found"}},
 )

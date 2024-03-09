@@ -14,14 +14,14 @@ RUN apt-get update && apt-get install -y netcat libpq-dev
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY backend/requirements.txt requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 # copy project
-COPY backend/images /app/images
-COPY backend/migrations /app/migrations
-COPY backend/src /app/src
-COPY backend/entrypoint.sh /app/entrypoint.sh
+COPY images /app/images
+COPY migrations /app/migrations
+COPY src /app/src
+COPY entrypoint.sh /app/entrypoint.sh
 
 # run entrypoint.sh
 ENTRYPOINT ["/app/entrypoint.sh"]

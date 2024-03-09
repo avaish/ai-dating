@@ -20,7 +20,7 @@ CHAT_MODE_TO_PROMPT = {
 
 
 router = APIRouter(
-    prefix="/chats",
+    prefix="/api/chats",
     tags=["chats"],
     responses={404: {"description": "Not found"}},
 )

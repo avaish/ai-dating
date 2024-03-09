@@ -6,7 +6,7 @@ from src.models.posts import Post, create_post_repository
 
 
 router = APIRouter(
-    prefix="/posts",
+    prefix="/api/posts",
     tags=["posts"],
     responses={404: {"description": "Not found"}},
 )

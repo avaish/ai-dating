@@ -2,20 +2,24 @@ version: '3.8'
 
 services:
   nginx:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - './nginx.conf:/etc/nginx/conf.d/default.conf'
+    container_name: proxy-ai-dating-app
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    image: proxy-ai-dating-app
     ports:
       - '80:80'
+    volumes:
+      - ./frontend/:/app/
     networks:
       - ai-dating-network
     depends_on:
       - ai-dating
   ai-dating:
-    build:
-      dockerfile: backend/Dockerfile
     container_name: ai-dating
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
     image: ai-dating
     ports:
       - "8001:5000"

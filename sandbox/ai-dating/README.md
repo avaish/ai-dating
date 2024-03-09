@@ -13,7 +13,7 @@ to set-up the virtual environment.
 
 There is configuration for VSCode in this repo, otherwise you're on your own.
 
-Add `.env.local` with `OPENAI_API_KEY`
+Add `.env.local` with `OPENAI_API_KEY=<key>`
 
 Run
 ```sh

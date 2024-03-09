@@ -24,10 +24,11 @@ services:
       ai-dating-network:
         aliases:
           - ai-dating-app
-    environment:
-      - DATABASE=postgres
-      - SQL_HOST=ai-dating
-      - SQL_PORT=5432
+    env_file:
+    - path: ./default.env
+      required: true
+    - path: ./override.env
+      required: false
   db:
     image: postgres:13
     container_name: db
@@ -49,5 +50,3 @@ volumes:
 
 networks:
   ai-dating-network:
-
-

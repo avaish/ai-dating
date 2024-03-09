@@ -38,7 +38,7 @@ async def read_posts(session_id: str, post_repository: Repository[Post] = Depend
     ai_message = chain.invoke({})
     print(ai_message)
 
-    chat_session = ChatSession()
+    chat_session = ChatSession(session_id, system_message)
     chat_session.add_ai_message(ai_message)
     ai_message = chat_session.invoke("I love programming.")
     print(ai_message)

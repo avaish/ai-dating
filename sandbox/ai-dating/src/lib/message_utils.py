@@ -1,5 +1,4 @@
-import base64
-from typing import Any, Optional, Type, TypeAlias
+from typing import Any, Type, TypeAlias
 
 from langchain_core.prompt_values import ChatPromptValue
 from langchain.schema import HumanMessage, AIMessage, SystemMessage

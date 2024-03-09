@@ -1,18 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException
-from langchain.chains import create_history_aware_retriever
-from langchain.chains.combine_documents import create_stuff_documents_chain
+from fastapi import APIRouter
 
-from langchain_core.callbacks import CallbackManagerForRetrieverRun
-from langchain_core.documents import Document
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.prompts import ChatPromptTemplate
 
 
-from src.models.base_model import Repository
-from src.models.posts import Post, create_post_repository
 from src.lib.chat_session import ChatSession
 from src.lib.image_utils import create_image_message
-from src.lib.message_utils import create_human_message, create_system_message
+from src.lib.message_utils import create_system_message
 from src.lib.open_api_client import get_open_api_client
 from src.lib.prompts import PROFILE_GURU_PROMPT
 

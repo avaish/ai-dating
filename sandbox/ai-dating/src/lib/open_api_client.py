@@ -1,6 +1,5 @@
 
-import base64
-from typing import Optional, Type, TypeAlias
+from typing import Optional
 
 from langchain_openai.llms import OpenAI
 from langchain_openai.chat_models import ChatOpenAI

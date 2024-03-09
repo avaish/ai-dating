@@ -1,11 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
-from langchain.chains import create_history_aware_retriever
-from langchain.chains.combine_documents import create_stuff_documents_chain
 
-from langchain_core.callbacks import CallbackManagerForRetrieverRun
-from langchain_core.documents import Document
-from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
-from langchain_core.runnables.history import RunnableWithMessageHistory
+from langchain_core.prompts import ChatPromptTemplate
 
 
 from src.models.base_model import Repository

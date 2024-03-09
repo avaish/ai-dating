@@ -1,6 +1,4 @@
-from typing import Optional, Self
-
-from langchain.schema import HumanMessage, AIMessage, SystemMessage
+from langchain.schema import AIMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_community.chat_message_histories.postgres import PostgresChatMessageHistory

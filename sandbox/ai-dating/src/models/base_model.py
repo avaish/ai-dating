@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Generic, Iterator, Mapping, Optional, TypeVar
+from typing import Generic, Iterator, Optional, TypeVar
 import uuid
 
 

@@ -13,13 +13,14 @@ services:
     depends_on:
       - ai-dating
   ai-dating:
-    build: .
+    build:
+      dockerfile: backend/Dockerfile
     container_name: ai-dating
     image: ai-dating
     ports:
       - "8001:5000"
     volumes:
-      - ./:/app/
+      - ./backend/:/app/
     networks:
       ai-dating-network:
         aliases:

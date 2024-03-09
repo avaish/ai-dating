@@ -42,4 +42,4 @@ yarn-error.log*
 *.tsbuildinfo
 
 __pycache__
-sandbox/ai_dating/override.env
+sandbox/ai-dating/override.env

@@ -50,4 +50,4 @@ Host DB
 
 Deploy non-locally
 
-Store Message History/Session in DB
+Add precommit hooks

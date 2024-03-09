@@ -42,6 +42,11 @@ to access the Database
 
 Alembic for migrations. See `entrypoint.sh`
 
+## References
+
+We'll probably want to change the `message` table a bit to have indices and stuff
+https://api.python.langchain.com/en/latest/_modules/langchain_community/chat_message_histories/postgres.html#PostgresChatMessageHistory
+
 # TODO
 
 Dev ENV File

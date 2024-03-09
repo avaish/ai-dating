@@ -1,8 +1,10 @@
 alembic
 langchain
+langchain_community
 langchain-openai
 fastapi
 openai
+psycopg
 psycopg2-binary
 pydantic
 python-dotenv

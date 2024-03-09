@@ -10,7 +10,7 @@ ENV PYTHONUNBUFFERED 1
 ENV PYTHONPATH "${PYTHONPATH}:/src"
 
 # install system dependencies
-RUN apt-get update && apt-get install -y netcat
+RUN apt-get update && apt-get install -y netcat libpq-dev
 
 # install dependencies
 RUN pip install --upgrade pip

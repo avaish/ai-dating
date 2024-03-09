@@ -25,7 +25,7 @@ router = APIRouter(
 @router.get("/{session_id}")
 async def do_chat(session_id: str, text: str, image: bool):
     system_message = create_system_message(PROFILE_GURU_PROMPT)
-    chat_session = ChatSession.get_or_create(session_id, system_message)
+    chat_session = ChatSession(session_id, system_message)
     if image:
         open_api_client = get_open_api_client()
         chat = open_api_client.chat_model

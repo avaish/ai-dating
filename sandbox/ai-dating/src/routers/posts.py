@@ -49,7 +49,7 @@ async def read_posts(session_id: str, post_repository: Repository[Post] = Depend
     ai_message = chat_session.invoke("I own a yacht")
     print(ai_message)
 
-    ai_message = chat_session.invoke("Thank you! That's all")
+    ai_message = chat_session.invoke("Can you summarize the photos and the prompts we just made? Thanks!")
     print(ai_message)
 
     print(chat_session.chat_history)

@@ -29,9 +29,9 @@ https://code.visualstudio.com/docs/python/environments
 
 ## Technical Infrastructure
 
-A good place to start is with `docker-compose.yaml`. This shows the three services that we run nginx, db, and ai-dating. nginx is our proxy, postgres is our db, and ai-dating is Python Fast API App.
+A good place to start is with `docker-compose.yaml`. This shows the three services that we run `nginx`, `db`, and `ai-dating`. `nginx` is our proxy, `db` is our poatgres-db, and `ai-dating` is Python Fast API App.
 
-From here, looking at the `Dockerfile` will show the entrypoint for our Flask App.
+From here, looking at the `Dockerfile` will show the entrypoint for our App.
 
 You can run `docker logs -f nginx`, `docker logs -f db`, `docker logs -f ai-dating` to see logs.
 

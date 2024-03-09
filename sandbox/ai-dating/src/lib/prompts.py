@@ -1,5 +1,3 @@
-from langchain_core.prompts import ChatPromptTemplate
-
 PROFILE_GURU_PROMPT = """You are a dating consultant bot, trying to build a Hinge profile for the user. \n\n
 Your final output should be (a) 6 photos that make them look their best, and (b) 3 responses to standard Hinge prompts that represent their authentic self in a charming light. \n\n
 Standard Hinge prompts include: "This year, I really want to", "My most irrational fear", "I go crazy for", "Typical Sunday", "My simple pleasures", "I'm convinced that", "I bet you can't", "Let's make sure we're on the same page about", "Never have I ever", "Biggest risk I've taken". \n\n
@@ -33,9 +31,3 @@ Snippet from match profile: "Dating me is like driving down a staircase" \n "I'v
 
 Ask user for a snippet from their match's profile they'd like to react to.
 """
-
-PROFILE_GURU_PROMPT_TEMPLATE = ChatPromptTemplate.from_messages([
-    ("system", PROFILE_GURU_PROMPT),
-    ("user", "{input}"),
-])
-BANTER_GURU_PROMPT_TEMPLATE = ChatPromptTemplate.from_template(BANTER_GURU_PROMPT)
